@@ -1,19 +1,28 @@
 #!/usr/bin/env ruby
 
-output       = []
-group_num    = nil
-new_group    = true
-groups       = []
+output     = []
+last_char  = ""
+group_num  = nil
+new_group  = true
+groups     = []
 
-#Note: Regex
+# Note: Prints the line with or without a "\n"	
+def send_line( input:, last_line: false, last_char: )
+	if last_char != "\n" && last_line
+		print input.chomp!
+	else
+		print input
+	end
+end
+
+# Note: Regex
 # This script is only as good as this regex, makes me nervous.
-# Layout: (indention)(optional keyword + optional type + var name)(operator)(data). There are some options spaces " ?" & " *".
+# Capture Groups: (indention)(optional keyword + optional type + var name)(operator)(data).
 assignments = %r{(^[ \t]*)([a-z]* ?[a-z_-]* ?[$@:%&a-zA-Z0-9_-]+ +)(\+=|-=|\*=|\*\*=|/=|//=|%=|&=|\|=|\^=|\|=|\|\|=|<<=|>>=|=>|:=|=) *(.+)}
 
-#Note: Loop for gathering lines and info.
-# Makes an array of MatchData objects "m" which is the line split into four peices.
-# Finds the longest length from start of variable name to operator.
-# Finds the longest operator so padding on the far side will be consistent even if list contains different kinds.
+# Note: Input loop.
+# Makes an array "output" of MatchData "m" and strings for non-matched line. 
+# Collects spacing info from m's and puts them into groups, group_num: "line numbers", "longest assignment", "longest operator".
 ARGF.each_line do | line |
 	if m = line.match( assignments )
 		if new_group
@@ -29,10 +38,10 @@ ARGF.each_line do | line |
  		new_group = true
  		output << line
 	end
-	@last_char = line[-1]
+ 	last_char = line[-1]
 end
 
-#Note: Loop for processing and compiling lines.
+# Note: Output loop.
 # Makes each line with consistent spacing around assignment operators.
 output.each_with_index  do | line, index |
 	if line.class == MatchData
@@ -52,14 +61,10 @@ output.each_with_index  do | line, index |
 		var.length < gap_width ? gap = " " * (gap_width - var.length) : gap = ""
 		op.length < op_width ? op_pad = " " * (1 + op_width - op.length) : op_pad = " "
 		
-		output[ index ] = "#{indent}#{var}#{gap}#{op}#{op_pad}#{stuff}\n"
-	else
-		output[ index ] = "#{line}"
-	end
-end
+		index == ( output.size - 1 ) ? last_line = true : last_line = false
 
-if ENV[ 'BB_DOC_SELSTART' ] != ENV[ 'BB_DOC_SELEND' ] && @last_char != "\n"
-	print output.join.chomp
-else
-	print output.join
+		send_line( input: "#{indent}#{var}#{gap}#{op}#{op_pad}#{stuff}\n", last_line: last_line, last_char: last_char )
+	else
+		send_line( input: "#{line}", last_line: last_line, last_char: last_char )
+	end
 end
