@@ -7,7 +7,6 @@ const int var_name     = 299792458; // meters a second
 ```
 
 __This also:__
-
 ```
 @this     =   "that"  
 $way      =   "way back"  
@@ -41,5 +40,6 @@ __What it won't:__
 ```
 var b, c int = 1, 2  
 var c, d string = "s", "x"  
-let (firstNumber, secondNumber) = (10, 42)  
+let (firstNumber, secondNumber) = (10, 42)
+Boolean.true? ? x = "foo" : x = "bar"
 ```
