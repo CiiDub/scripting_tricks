@@ -1,0 +1,11 @@
+on menuselect(menu_name, item_name)
+	if menu_name = "" and item_name = "" then
+		highjack_command = false
+	end if
+end menuselect
+
+# on postmenuselect()
+# 	tell application "BBEdit"
+# 
+# 	end tell
+# end postmenuselect
