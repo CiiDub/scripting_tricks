@@ -48,7 +48,7 @@ namespace :package do
 		mkdir_p( dir_list, verbose: false )
 	end
 	
-	desc "Installs Scripts, Text Filters, Clippings, and Resources for #{@bbpackage_name}"
+	desc "Installs Scripts, Text Filters, Clippings, and Resources for #{@bbpackage_name}. Runs as a prereq for package:install"
 	task :install => [ :setup ] do
 		changes_made = false
 		src_files.each_with_index do | src_f, index |
