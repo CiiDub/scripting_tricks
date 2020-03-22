@@ -1,7 +1,7 @@
 # Scripting Tricks
 A BBEdit package to help with scripting.
 
-Just getting started (3/20/20). I hope to add a fair amount to this. As I use scripts, clippings, text filters and Stationery that I like and that help with scripting I’ll add them here.
+Just getting started (3/20/20). I hope to add a fair amount to this. As I use scripts, clippings, text filters and Stationery that I like and that help with scripting I'll add them here.
 
 ## Rake Tasks
 - __rake package:install__ Installs Scripts, Text Filters, Clippings, and Resources for Scripting Tricks.
@@ -35,7 +35,7 @@ __What it will align:__
 
 ```
 extern float var_name  = 4.2;  
-static string var_name = “I don't move”;  
+static string var_name = "I don't move";  
 const int var_name     = 299792458; // meters a second
 ```
 

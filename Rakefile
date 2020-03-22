@@ -1,37 +1,58 @@
+@bbpackages_path = "#{Dir.home}/Library/Application Support/BBEdit/Packages"
 @bbpackage_name  = "Scripting Tricks"
 @bbpackage_ext   = ".bbpackage"
-@bbpackages_path = "#{Dir.home}/Library/Application Support/BBEdit/Packages"
+@bbpackage       = "#{@bbpackages_path}/#{@bbpackage_name}#{@bbpackage_ext}"
 @project_path    = "#{Dir.pwd}"
 
-# Todo: REFACTOR THIS! Install could be refactored into a method. 
-# Todo: Also the setup variables dir_list, src_files ... make a method that returns a hash {dir_list:, src_files:, target_files:} 
+def get_src_and_trg_files ( search_list: [], working_dir: @project_path, install_dir: @bbpackage )
+	output = { src_list: [], dir_list: [], trg_list: [] }
+	
+	output[ :src_list ] = search_list.each do | f | 
+		output[ :dir_list ] << f.gsub( working_dir, install_dir ) if File.directory?( f )
+	end
+	.delete_if { | f | File.directory?( f ) }
+	
+	output[ :trg_list ] = output[ :src_list ].gsub( working_dir, install_dir )
+	return output
+end
+
+def installed? ( src_files, target_files)
+	changes_made = false
+	src_files.each_with_index do | src_f, index |
+		trg_f = target_files[ index ]
+		begin
+			unless identical?( src_f,  trg_f)
+				changes_made = true
+				puts "Updating #{trg_f}"
+				cp src_f, trg_f
+			end
+		rescue Errno::ENOENT
+			changes_made = true
+			puts "Makeing new file #{trg_f}."
+			cp( src_f, trg_f, verbose: false )
+		end
+	end
+	return changes_made
+end
+
 namespace :package do
-	dir_list = []
-	src_files = FileList[
+	folders = FileList[
 		"#{@project_path}/Contents/Resources/**/*", 
 		"#{@project_path}/Contents/Clippings/**/*", 
 		"#{@project_path}/Contents/Text Filters/**/*", 
 		"#{@project_path}/Contents/Scripts/**/*"
 	]
-	.each do | f | 
-		dir_list << f.gsub( 
-		"#{@project_path}", 
-		"#{@bbpackages_path}/#{@bbpackage_name}#{@bbpackage_ext}"
-		) if File.directory?( f ) 
-	end
-	.delete_if do |f|
-		File.directory?( f )
-	end
-	target_files = src_files.gsub( 
-		"#{@project_path}", 
-		"#{@bbpackages_path}/#{@bbpackage_name}#{@bbpackage_ext}"
-	)
+	
+	setup        = get_src_and_trg_files( search_list: folders )
+	dir_list     = setup[:dir_list]
+	src_files    = setup[:src_list]
+	target_files = setup[:trg_list]
 	
 	desc "Deletes Installed Package"
 	task :remove do
-		if File.exists?( "#{@bbpackages_path}/#{@bbpackage_name}#{@bbpackage_ext}" )
+		if File.exists?( "#{@bbpackage}" )
 			puts "Deleting #{@bbpackage_name}."
-			rm_r( "#{@bbpackages_path}/#{@bbpackage_name}#{@bbpackage_ext}", verbose: false )
+			rm_r( "#{@bbpackage}", verbose: false )
 		else
 			puts "#{@bbpackage_name} isn't installed."
 		end
@@ -40,32 +61,17 @@ namespace :package do
 	desc "Creates Scripting Tricks package and directory structure."
 	task :setup do
 		mkdir_p( [
-		"#{@bbpackages_path}/#{@bbpackage_name}#{@bbpackage_ext}/Contents/Resources",
-		"#{@bbpackages_path}/#{@bbpackage_name}#{@bbpackage_ext}/Contents/Clippings",
-		"#{@bbpackages_path}/#{@bbpackage_name}#{@bbpackage_ext}/Contents/Text Filters",
-		"#{@bbpackages_path}/#{@bbpackage_name}#{@bbpackage_ext}/Contents/Scripts"
+		"#{@bbpackage}/Contents/Resources",
+		"#{@bbpackage}/Contents/Clippings",
+		"#{@bbpackage}/Contents/Text Filters",
+		"#{@bbpackage}/Contents/Scripts"
 		], verbose: false)
 		mkdir_p( dir_list, verbose: false )
 	end
 	
 	desc "Installs Scripts, Text Filters, Clippings, and Resources for #{@bbpackage_name}. Runs as a prereq for package:install"
 	task :install => [ :setup ] do
-		changes_made = false
-		src_files.each_with_index do | src_f, index |
-			trg_f = target_files[ index ]
-			begin
-				unless identical?( src_f,  trg_f)
-					changes_made = true
-					puts "Updating #{trg_f}"
-					cp src_f, trg_f
-				end
-			rescue Errno::ENOENT
-				changes_made = true
-				puts "Makeing new file #{trg_f}."
-				cp( src_f, trg_f, verbose: false )
-			end
-		end
-		if changes_made
+		if installed?( src_files, target_files )
 			puts "A fresh install"
 		else
 			puts "No changes made to #{@bbpackage_name}"	
@@ -74,19 +80,12 @@ namespace :package do
 end
 
 namespace :stationery do
-	dir_list = []
-	src_files = FileList["#{@project_path}/Stationery/**/*"]
-	.each do | f | 
-		dir_list << f.gsub( 
-		"#{@project_path}", 
-		"#{Dir.home}/Library/Application Support/BBEdit/"
-		) if File.directory?( f ) 
-	end
-	.delete_if do |f|
-		File.directory?( f )
-	end
-	target_files = src_files.gsub( "#{@project_path}", "#{Dir.home}/Library/Application Support/BBEdit/" )
+	folders = FileList["#{@project_path}/Stationery/**/*"]
 	
+	setup        = get_src_and_trg_files( search_list: folders, install_dir: "#{Dir.home}/Library/Application Support/BBEdit/" )
+	src_files    = setup[:src_list]
+	target_files = setup[:trg_list]
+
 	desc "Deletes Installed Stationery Files."
 	task :remove do
 		target_files.each do | trg_f |
@@ -100,25 +99,10 @@ namespace :stationery do
 	
 	desc "Installs files into BBEdits Stationery folder."
 	task :install do
-		changes_made = false
-		src_files.each_with_index do | src_f, index |
-			trg_f = target_files[ index ]
-			begin
-				unless identical?( src_f,  trg_f)
-					changes_made = true
-					puts "Updating #{trg_f}"
-					cp src_f, trg_f
-				end
-			rescue Errno::ENOENT
-				changes_made = true
-				puts "Makeing new stationery file #{trg_f}."
-				cp( src_f, trg_f, verbose: false )
-			end
-		end
-		if changes_made
+		if installed?( src_files, target_files )
 			puts "Stationery freshly installed"
 		else
-			puts "No changes made."	
+			puts "No changes made to stationery files."	
 		end
 	end
 end
