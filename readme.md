@@ -16,14 +16,14 @@ You can however download and install it manually if you know what you are doing.
 ## Align Assignments
 This is a text filter that will align you assignments to their operators.
 
-__So it takes this__ ___mad woman's breakfast___.
+__So it takes this__ ___mad woman's breakfast:___
 
 ```
 var magic-johnson = "Number one choice"
 var oscar-robertson = "Number two choice"
 var i-thomas = "Number three choice"
 ```
-__Then makes__ 
+__Then makes:__ 
 
 ```
 var magic-johnson   = "Number one choice"
