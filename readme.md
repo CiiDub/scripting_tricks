@@ -13,8 +13,9 @@ The best way to install this package is to download/clone it where you might kee
 
 You can however download and install it manually if you know what you are doing.
 
-## Align Assignments
-This is a text filter that will align you assignments to their operators.
+## Text Filters
+- __Align Assignments__
+This is a text filter that will align a list of assignments to their operators.  
 
 __So it takes this__ ___mad woman's breakfast:___
 
@@ -97,8 +98,19 @@ let (firstNumber, secondNumber) = (10, 42)
 - __Ruby Clippings__ A set of simplified clippings for ruby.
 
 - __Scripting Clippings__ to help with scripting in general.
+	- __shebang__ `#!/usr/bin/env <interpreter>`  
+	This works with a script in the Resources folder to try and guess the right interpreter. It’s default (or fallback) is the document type.  
+	
+	
+- __WorkSheet Clippings__ to be used with Shell Worksheets.
+	- __man_bb__ `man <cmd> | col -b | bbedit -m \"UNIX man page"`  
+	⌃↵ will open a Unix man page in a separate BBEdit window with the document type UNIX man page. My normal color scheme is a dark blue, I have the the Unix Man page doc type set to the standard white. If I were really hip it would be yellow with black text.  
+
+	- __cd_pwd__ `cd '/Users/chris/Projects/Scripting Tricks/'; PWD` or `cd <You might want to save.>; PWD`  
+	This one finds your working directory and expands it out with the `cd` command. If your working in a BBEdit project the `PWD` is the projects root directory. If it is a saved Shell Worksheet it’s it’s parent directory. If the Worksheet isn’t saved it will remind you to save and let you type something in. Finally if your using BBEdits persistent Worksheet it `PWD` will be the current working directory selected.
+	
 
 ## Stationery
-- __Text Filter.rb__ is a good starting place to write a text filter in ruby. It sets up two loops. One to gather STDIN, line by line, process, and read into an array. One to process and read out to BBEdit. It also has a methed to help with line endings and reading out.
+- __Text Filter.rb__ is a good starting place to write a text filter in ruby. It sets up two loops and one method. One loop to read the file or selection, a setup pass.  The second to process and print out to BBEdit. The method helps deal with line endings when printing out.
 
 - __Menu Applescript__ is a starting point to write a Menu Script for BBedit. These are scripts that let you prepend, highjack, and/or append to a BBEdit native menu command.

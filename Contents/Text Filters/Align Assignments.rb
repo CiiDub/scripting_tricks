@@ -21,8 +21,8 @@ end
 assignments = %r{(^[ \t]*)([a-z]* ?[a-z_-]* ?[$@:%&a-zA-Z0-9_-]+ +)(\+=|-=|\*=|\*\*=|/=|//=|%=|&=|\|=|\^=|\|=|\|\|=|<<=|>>=|=>|:=|=) *(.+)}
 
 # Note: Input loop.
-# Makes an array "output" of MatchData "m" and strings for non-matched line. 
-# Collects spacing info from m's and puts them into groups, group_num: "line numbers", "longest assignment", "longest operator".
+# Makes an array of MatchData and Strings for non-matched line. 
+# Groups adjacent assignments together, spacing is made relative to these groups.
 ARGF.each_line do | line |
 	if m = line.match( assignments )
 		if new_group

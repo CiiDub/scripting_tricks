@@ -24,7 +24,7 @@ def installed? ( src_files, target_files)
 			unless identical?( src_f,  trg_f)
 				changes_made = true
 				puts "Updating #{trg_f}"
-				cp src_f, trg_f
+				cp( src_f, trg_f, verbose: false )
 			end
 		rescue Errno::ENOENT
 			changes_made = true
