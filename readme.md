@@ -110,7 +110,8 @@ Note: You can use the Setup palette to enable or disable clipping groups per lan
 	- __man_bb__  
 	`man < cmd > | col -b | bbedit --view-top -m "UNIX man page"`  
 	Executing this will open a Unix man page in a separate BBEdit window with the language set to UNIX man page.  
-	My normal color scheme is a dark blue, I have the the Unix Man page language (doc type) set to the standard black and white. If I were really hip it would be yellow with black text.  
+	My normal color scheme is a dark blue, I have the the Unix Man page language (doc type) set to the standard black and white. If I were really hip it would be yellow with black text.
+	I think a lot of folks would like this as addition to their .bashrc, I added it as a function to Fishshell.
 
 	- __cd_pwd__  
 	`cd < '/Users/chris/' >; PWD`  
