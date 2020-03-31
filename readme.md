@@ -106,7 +106,7 @@ Note: You can use the Setup palette to enable or disable clipping groups per lan
 - __WorkSheet Clippings__ are to be used with Shell/Unix Worksheets. They expand out to useful shell commands.
 
 	- __man_bb__  
-	`man < cmd > | col -b | bbedit -m "UNIX man page"`  
+	`man < cmd > | col -b | bbedit --view-top -m "UNIX man page"`  
 	Executing this will open a Unix man page in a separate BBEdit window with the language set to UNIX man page.  
 	My normal color scheme is a dark blue, I have the the Unix Man page language (doc type) set to the standard black and white. If I were really hip it would be yellow with black text.  
 
@@ -115,7 +115,7 @@ Note: You can use the Setup palette to enable or disable clipping groups per lan
 	`cd '/projects/root/dir/'; PWD`    
 	`cd < You might want to save. >; PWD`  
 	This one finds your working directory and uses it as the input for the `cd` command, followed by `PWD` to display the directory.  
-		- If your using BBEdits persistent Unix Worksheet `PWD` will be the current working directory. The default is your home directory. The path to `PDW` will be selected so it can be changed easily
+		- If your using BBEdits persistent Unix Worksheet `PWD` will be the current working directory. The default is your home directory. The path to `PDW` will be selected so it can be changed easily.
 		- If your working in a BBEdit project the `PWD` is the projects root directory. 
 		- If you are using a good ol' Shell Worksheet it's parent directory is the PWD. If the Worksheet isn’t saved it will remind you to save and let you type something in. 
 
