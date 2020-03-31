@@ -1,7 +1,7 @@
 # Scripting Tricks
 A BBEdit package to help with scripting.
 
-Just getting started (3/20/20). I hope to add a fair amount to this. As I use scripts, clippings, text filters and Stationery that I like and that help with scripting I'll add them here.
+Just getting started (3/20/20). I hope to add a fair amount to this. As I use scripts, clippings, text filters and find them worthy I’ll move them into this project.
 
 ## Rake Tasks
 - __rake package:install__ Installs Scripts, Text Filters, Clippings, and Resources for Scripting Tricks.
@@ -95,11 +95,13 @@ let (firstNumber, secondNumber) = (10, 42)
 ```
 
 ## Clippings
-- __Ruby Clippings__ A set of simplified clippings for ruby.  
 Note: You can use the Setup palette to enable or disable clipping groups per language. You can find it under the menu __BBEdit > Setup__.
 
+- __Ruby Clippings__ A set of simplified clippings for ruby.  
+
 - __Scripting Clippings__ to help with scripting in general.
-	- __shebang__ `#!/usr/bin/env <interpreter>`  
+	- __shebang__  
+	`#!/usr/bin/env < interpreter >`  
 	This works with a script in the Resources folder to try and guess the right interpreter. It’s default (or fallback) is the documents language.  
 	
 	
