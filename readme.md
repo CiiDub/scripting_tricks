@@ -95,20 +95,29 @@ let (firstNumber, secondNumber) = (10, 42)
 ```
 
 ## Clippings
-- __Ruby Clippings__ A set of simplified clippings for ruby.
+- __Ruby Clippings__ A set of simplified clippings for ruby.  
+Note: You can use the Setup palette to enable or disable clipping groups per language. You can find it under the menu __BBEdit > Setup__.
 
 - __Scripting Clippings__ to help with scripting in general.
 	- __shebang__ `#!/usr/bin/env <interpreter>`  
-	This works with a script in the Resources folder to try and guess the right interpreter. It’s default (or fallback) is the document type.  
+	This works with a script in the Resources folder to try and guess the right interpreter. It’s default (or fallback) is the documents language.  
 	
 	
-- __WorkSheet Clippings__ to be used with Shell Worksheets.
-	- __man_bb__ `man <cmd> | col -b | bbedit -m "UNIX man page"`  
-	⌃↵ will open a Unix man page in a separate BBEdit window with the document type UNIX man page. My normal color scheme is a dark blue, I have the the Unix Man page doc type set to the standard white. If I were really hip it would be yellow with black text.  
+- __WorkSheet Clippings__ are to be used with Shell/Unix Worksheets. They expand out to useful shell commands.
 
-	- __cd_pwd__ `cd '/Users/chris/Projects/Scripting Tricks/'; PWD` or `cd <You might want to save.>; PWD`  
-	This one finds your working directory and expands it out with the `cd` command. If your working in a BBEdit project the `PWD` is the projects root directory. If it is a saved Shell Worksheet it’s it’s parent directory. If the Worksheet isn’t saved it will remind you to save and let you type something in. Finally if your using BBEdits persistent Worksheet `PWD` will be the current working directory selected.
-	
+	- __man_bb__  
+	`man < cmd > | col -b | bbedit -m "UNIX man page"`  
+	Executing this will open a Unix man page in a separate BBEdit window with the language set to UNIX man page.  
+	My normal color scheme is a dark blue, I have the the Unix Man page language (doc type) set to the standard black and white. If I were really hip it would be yellow with black text.  
+
+	- __cd_pwd__  
+	`cd < '/Users/chris/' >; PWD`  
+	`cd '/projects/root/dir/'; PWD`    
+	`cd < You might want to save. >; PWD`  
+	This one finds your working directory and uses it as the input for the `cd` command, followed by `PWD` to display the directory.  
+		- If your using BBEdits persistent Unix Worksheet `PWD` will be the current working directory. The default is your home directory. The path to `PDW` will be selected so it can be changed easily
+		- If your working in a BBEdit project the `PWD` is the projects root directory. 
+		- If you are using a good ol' Shell Worksheet it's parent directory is the PWD. If the Worksheet isn’t saved it will remind you to save and let you type something in. 
 
 ## Stationery
 - __Text Filter.rb__ is a good starting place to write a text filter in ruby. It sets up two loops and one method. One loop to read the file or selection, a setup pass.  The second to process and print out to BBEdit. The method helps deal with line endings when printing out.
