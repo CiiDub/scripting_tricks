@@ -103,7 +103,16 @@ Note: You can use the Setup palette to enable or disable clipping groups per lan
 	- __shebang__  
 	`#!/usr/bin/env < interpreter >`  
 	This works with a script in the Resources folder to try and guess the right interpreter. It’s default (or fallback) is the documents language.  
+
+- __Applescript Clippings__ A little help with AppleScript App. AppleScript, well, it’s better than JXA.
 	
+	- __path_to__ & __path_to_bbedit__ This will help in dealing with paths. You can convert then to Classic Mac/Finder paths with ` <path> as alias` or convert them to Unix style paths with `POSIX path <var for path>`.
+	
+		- __path_to__
+		`set #INSERTION#_path to ((path to <#?home folder | application support folder | application app#> from user domain) as text) <#? as alias #>`
+	
+		- __path_to_bbedit__
+		`set #SELSTART#bbedit_folder#SELEND# to ((path to application support folder from user domain) as text) & "BBEdit" <#? as alias #>`
 	
 - __WorkSheet Clippings__ are to be used with Shell/Unix Worksheets. They expand out to useful shell commands.
 
