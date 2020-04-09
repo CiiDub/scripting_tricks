@@ -134,4 +134,4 @@ Note: You can use the Setup palette to enable or disable clipping groups per lan
 ## Stationery
 - __Text Filter.rb__ is a good starting place to write a text filter in ruby. It sets up two loops and one method. One loop to read the file or selection, a setup pass.  The second to process and print out to BBEdit. The method helps deal with line endings when printing out.
 
-- __Menu Applescript__ is a starting point to write a Menu Script for BBedit. These are scripts that let you prepend, highjack, and/or append to a BBEdit native menu command.
+- __Menu AppleScript__ is a starting point to write a Menu Script for BBedit. These are scripts that let you prepend, highjack, and/or append to a BBEdit native menu command.

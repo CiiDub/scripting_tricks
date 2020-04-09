@@ -80,8 +80,7 @@ namespace :package do
 end
 
 namespace :stationery do
-	folders = FileList["#{@project_path}/Stationery/**/*"]
-	
+	folders      = FileList["#{@project_path}/Stationery/**/*"]
 	setup        = get_src_and_trg_files( search_list: folders, install_dir: "#{Dir.home}/Library/Application Support/BBEdit/" )
 	src_files    = setup[:src_list]
 	target_files = setup[:trg_list]
