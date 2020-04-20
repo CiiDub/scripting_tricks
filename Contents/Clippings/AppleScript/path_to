@@ -1,2 +1,2 @@
 #INDENT#
-set #INSERTION#_path to ((path to <#?home folder | application support folder | application app#> from user domain) as text) <#? as alias #>
+path to <#?home folder | application support folder | application app#> from user domain

@@ -1,2 +1,2 @@
 #INDENT#
-set #SELSTART#bbedit_folder#SELEND# to ((path to application support folder from user domain) as text) & "BBEdit" <#? as alias #>
+set #SELSTART#bbedit_folder#SELEND# to <#alias | POSIX path of#> (((path to application support folder from user domain) as text) & "BBEdit")
