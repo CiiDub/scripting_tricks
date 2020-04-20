@@ -10,7 +10,7 @@ tell application "BBEdit"
 	end if
 	if test_path = doc then
 		set pwd to working directory of document 1
-		return "cd '#SELSTART#" & pwd & "#SELEND#'; PWD#INSERTION#"
+		return "cd '#SELSTART#" & pwd & "#SELEND#'; PWD"
 	end if
 	# Projects and free flowing Worksheets.
 	tell project document 1
@@ -33,7 +33,7 @@ tell application "BBEdit"
 		else
 			set _alias to file of project window 1
 			if _alias = missing value then
-				return "cd <# You might want to save. #>; PWD<#? #>"
+				return "cd <# You might want to save. #>; PWD"
 			else
 				tell application "Finder" to set _file to container of file _alias as alias
 				set pwd to POSIX path of _file

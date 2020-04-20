@@ -1,1 +1,1 @@
-man <#command#> | col -b | bbedit --view-top -m "UNIX man page"<#? #>
+man <#command#> | col -b | bbedit --view-top -m "unix-man-page"
