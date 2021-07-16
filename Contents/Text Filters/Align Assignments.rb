@@ -18,7 +18,7 @@ end
 # Note: Regex
 # This script is only as good as this regex, makes me nervous.
 # Capture Groups: (indention)(optional keyword + optional type + var name)(operator)(data).
-assignments = %r{(^[ \t]*)([a-z]* ?[a-z_-]* ?[$@:%&a-zA-Z0-9_-]+ +)(\+=|-=|\*=|\*\*=|/=|//=|%=|&=|\|=|\^=|\|=|\|\|=|<<=|>>=|=>|:=|=) *(.+)}
+assignments = %r{(^[ \t]*)([a-z]* ?[a-z_-]* ?[$@:%&a-zA-Z0-9_-]+ +)(\+=|-=|\*=|\*\*=|/=|//=|%=|&=|\|=|\^=|\|=|\|\|=|<<|<<=|>>=|=>|:=|=) *(.+)}
 
 # Note: Input loop.
 # Makes an array of MatchData and Strings for non-matched line. 
