@@ -17,8 +17,8 @@ end
 
 # Note: Regex
 # This script is only as good as this regex, makes me nervous.
-# Capture Groups: (indention)(optional keyword + optional type + var name)(operator)(data).
-assignments = %r{(^[ \t]*)([a-z]* ?[a-z_-]* ?[$@:%&a-zA-Z0-9_-]+ +)(\+=|-=|\*=|\*\*=|/=|//=|%=|&=|\|=|\^=|\|=|\|\|=|<<|<<=|>>=|=>|:=|=) *(.+)}
+# Capture Groups: (indention)(optional keyword/c_type + var name + optional type)(operator)(data).
+assignments = %r{(^[ \t]*)(?!if|while)([a-z]* ?[ \[\]\*.$@:%&a-zA-Z0-9_-]+ *[0-9A-Za-z]* +)(\+=|-=|\*=|\*\*=|/=|//=|%=|&=|\|=|\^=|\|=|\|\|=|<<|<<=|>>=|=>|:=|=) +(.+)}
 
 # Note: Input loop.
 # Makes an array of MatchData and Strings for non-matched line. 
@@ -31,12 +31,12 @@ ARGF.each_line do | line |
 			new_group = false
 		end
  		output << m
-		groups[ group_num ][ :gap_width ] = m[2].length if m[2].length > groups[ group_num ][ :gap_width ]
-		groups[ group_num ][ :op_width ] = m[3].length if m[3].length > groups[ group_num ][ :op_width ]
- 		groups[ group_num ][ :line_no ] << ARGF.lineno
+		groups[ group_num ][ :gap_width ] =  m[2].length if m[2].length > groups[ group_num ][ :gap_width ]
+		groups[ group_num ][ :op_width ]  =  m[3].length if m[3].length > groups[ group_num ][ :op_width ]
+ 		groups[ group_num ][ :line_no ]   << ARGF.lineno
 	else
- 		new_group = true
- 		output << line
+ 		new_group =  true
+ 		output    << line
 	end
  	last_char = line[-1]
 end
