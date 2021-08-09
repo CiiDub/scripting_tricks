@@ -5,7 +5,7 @@ tell application "BBEdit"
 	tell application "Finder" to set lib to POSIX path of (path to library folder from user domain)
 	set test_path to lib & "Application Support/BBEdit/Unix Worksheet.worksheet"
 	set doc to file of document 1
-	if doc â‰  missing value then
+	if doc ­ missing value then
 		set doc to POSIX path of doc
 	end if
 	if test_path = doc then
