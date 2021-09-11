@@ -1,7 +1,7 @@
 # Scripting Tricks
 A BBEdit package to help with scripting.
 
-Just getting started (3/20/20). I hope to add a fair amount to this. As I use scripts, clippings, text filters and find them worthy I’ll move them into this project.
+I hope to add a fair amount to this. As I use scripts, clippings, text filters and find them worthy I’ll move them into this project.
 
 ## Rake Tasks
 - __rake package:install__ Installs Scripts, Text Filters, Clippings, and Resources for Scripting Tricks.
@@ -11,7 +11,7 @@ Just getting started (3/20/20). I hope to add a fair amount to this. As I use sc
 
 The best way to install this package is to download/clone it where you might keep projects and install it with the commands above.
 
-You can however download and install it manually if you know what you are doing.
+You can however download and install it by copying or moving the files manually.
 
 ## Text Filters
 - __Align Assignments__
@@ -132,6 +132,8 @@ Note: You can use the Setup palette to enable or disable clipping groups per lan
 		- If you are using a good ol' Shell Worksheet it's parent directory is the PWD. If the Worksheet isn’t saved it will remind you to save and let you type something in. 
 
 ## Stationery
-- __Text Filter.rb__ is a good starting place to write a text filter in ruby. It sets up two loops and one method. One loop to read the file or selection, a setup pass.  The second to process and print out to BBEdit. The method helps deal with line endings when printing out.
+- __Text Filter.rb__ is a starting point to write a text filter in ruby. Text filters the selection ( if present ) or the entire file as input.
 
 - __Menu AppleScript__ is a starting point to write a Menu Script for BBedit. These are scripts that let you prepend, highjack, and/or append to a BBEdit native menu command.
+
+- __Launchd Definition__ ... to make a definition for the launchd demon/agent launcher in macOS ( and sometimes Linux ).

@@ -1,11 +1,17 @@
 #!/usr/bin/env ruby
 
-output = []
+@output = []
 
 # Note: Input loop.
 ARGF.each_line do | line |
+ 	# Note: It's usually a good idea to track the last character in a line.
+ 	@last_char =  line[-1]
 	# CODE
-	output    << line
- 	last_char =  line[-1]
+	# Note: Probably a good idea to write a method(s) to do whatever processing you have planed.
+	# def change_stuff( line ) ... end
+	@output    << line
 end
 
+# Note: Usually how these things end.
+# @output.join("\n")
+# print @output
