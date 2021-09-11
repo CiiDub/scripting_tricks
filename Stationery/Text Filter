@@ -1,11 +1,11 @@
 #!/usr/bin/env ruby
 
-output     = []
+output = []
 
 # Note: Input loop.
 ARGF.each_line do | line |
 	# CODE
-	output << line
- 	last_char = line[-1]
+	output    << line
+ 	last_char =  line[-1]
 end
 

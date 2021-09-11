@@ -14,6 +14,8 @@ tell application "BBEdit"
 		return "bash"
 	else if doc = "javascript" then
 		return "node"
+	else if doc = "fish shell" then
+		return "fish"
 	else
 		return doc
 	end if

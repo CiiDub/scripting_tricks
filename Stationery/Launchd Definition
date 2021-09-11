@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string></string>
+
+	<key>Program</key>
+	<string></string>
+<!-- 
+	<key>ProgramArguments</key>
+	<array>
+		<string>/usr/local/bin/fish</string>
+		<string>/usr/local/bin/*.fish</string>
+	</array>	
+ -->
+
+<!-- 
+	<key>RunAtLoad</key>
+	<true />
+ -->
+
+<!-- 
+	<key>StartInterval</key> 
+	<integer>60</integer> 
+ -->
+	
+<!-- 
+	<key>StartCalendarInterval</key>
+	<dict>
+		<key>Day</key>
+		<integer></integer>
+		<key>Weekday</key>
+		<integer></integer>
+		<key>Hour</key> 
+		<integer></integer> 
+		<key>Minute</key> 
+		<integer></integer> 
+	</dict>
+ -->
+
+
+</dict>
+</plist>
