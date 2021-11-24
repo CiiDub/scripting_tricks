@@ -1,24 +1,26 @@
 #!/usr/bin/env ruby
 
 output     = []
-last_char  = ""
+last_input_char  = ""
 group_num  = nil
 new_group  = true
 groups     = []
 
-# Note: Prints the line with or without a "\n"	
-def send_line( input:, last_line: false, last_char: )
-	if last_char != "\n" && last_line
-		print input.chomp!
+# Note: Prints the line with or without a \n
+# Every assignment line is constructed with a \n.
+# If you didn't get the final \n in the selection then you will end up with an extra line.
+def print_line( new_line:, last_line: false, last_input_char: )
+	if last_input_char != "\n" && last_line
+		print new_line.chomp!
 	else
-		print input
+		print new_line
 	end
 end
 
 # Note: Regex
 # This script is only as good as this regex, makes me nervous.
 # Capture Groups: (indention)(optional keyword/c_type + var name + optional type)(operator)(data).
-assignments = %r{(^[ \t]*)(?!if|while)([a-z]* ?[ \[\]\*.$@:%&a-zA-Z0-9_-]+ *[0-9A-Za-z]* +)(\+=|-=|\*=|\*\*=|/=|//=|%=|&=|\|=|\^=|\|=|\|\|=|<<|<<=|>>=|=>|:=|=) +(.+)}
+assignments = %r{(^[ \t]*)(?!if|while)((?:[a-z]* )?(?:[\[\]\*.$@:%&a-zA-Z0-9_-]+)(?: ?: ?[0-9A-Za-z]*)? ) *(\+=|-=|\*=|\*\*=|/=|//=|%=|&=|\|=|\^=|\|=|\|\|=|<<|<<=|>>=|=>|:=|=) +(.+)}
 
 # Note: Input loop.
 # Makes an array of MatchData and Strings for non-matched line. 
@@ -38,7 +40,7 @@ ARGF.each_line do | line |
  		new_group =  true
  		output    << line
 	end
- 	last_char = line[-1]
+ 	last_input_char = line[-1]
 end
 
 # Note: Output loop.
@@ -63,8 +65,8 @@ output.each_with_index  do | line, index |
 		
 		index == ( output.size - 1 ) ? last_line = true : last_line = false
 
-		send_line( input: "#{indent}#{var}#{gap}#{op}#{op_pad}#{stuff}\n", last_line: last_line, last_char: last_char )
+		print_line( new_line: "#{indent}#{var}#{gap}#{op}#{op_pad}#{stuff}\n", last_line: last_line, last_input_char: last_input_char )
 	else
-		send_line( input: "#{line}", last_line: last_line, last_char: last_char )
+		print_line( new_line: "#{line}", last_line: last_line, last_input_char: last_input_char )
 	end
 end

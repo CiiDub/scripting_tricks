@@ -103,7 +103,10 @@ Note: You can use the Setup palette to enable or disable clipping groups per lan
 	- __shebang__  
 	`#!/usr/bin/env < interpreter >`  
 	This works with a script in the Resources folder to try and guess the right interpreter. It’s default (or fallback) is the documents language.  
-
+    
+	- __BB_*__
+	All of the BBEdit environmental variables wrapped in a single quote string.
+    
 - __Applescript Clippings__ A little help with AppleScript App. AppleScript, well, it’s better than JXA.
 	
 	- __path_to__ & __path_to_bbedit__ This will help in dealing with paths. You can convert then to Classic Mac/Finder paths with ` <path> as alias` or convert them to Unix style paths with `POSIX path <var for path>`.
@@ -130,7 +133,9 @@ Note: You can use the Setup palette to enable or disable clipping groups per lan
 		- If your using BBEdits persistent Unix Worksheet `PWD` will be the current working directory. The default is your home directory. The path to `PDW` will be selected so it can be changed easily.
 		- If your working in a BBEdit project the `PWD` is the projects root directory. 
 		- If you are using a good ol' Shell Worksheet it's parent directory is the PWD. If the Worksheet isn’t saved it will remind you to save and let you type something in. 
-
+## Scripts
+- __List BBEdit Env Variables__ Opens a document with the BBEdit environmental variables listed with their current values.
+	
 ## Stationery
 - __Text Filter.rb__ is a starting point to write a text filter in ruby. Text filters the selection ( if present ) or the entire file as input.
 
