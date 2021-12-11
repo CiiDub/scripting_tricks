@@ -1,10 +1,10 @@
 #!/usr/bin/env ruby
 
-output     = []
-last_input_char  = ""
-group_num  = nil
-new_group  = true
-groups     = []
+output          = []
+last_input_char = ""
+group_num       = nil
+new_group       = true
+groups          = []
 
 # Note: Prints the line with or without a \n
 # Every assignment line is constructed with a \n.
@@ -50,18 +50,17 @@ output.each_with_index  do | line, index |
 		gap_width = 0
 		op_width  = 0
 		groups.each do | g |
-			if g[ :line_no ].include?( index+1 )
-				gap_width = g[ :gap_width ]
-				op_width  = g[ :op_width ]
-			end
+			next g unless g[ :line_no ].include?( index+1 )
+			gap_width = g[ :gap_width ]
+			op_width  = g[ :op_width ]
 		end
 		indent = line[1]
 		var    = line[2]
 		op     = line[3]
 		stuff  = line[4]
 				
-		var.length < gap_width ? gap = " " * (gap_width - var.length) : gap = ""
-		op.length < op_width ? op_pad = " " * (1 + op_width - op.length) : op_pad = " "
+		var.length < gap_width ? gap = " " * ( gap_width - var.length ) : gap = ""
+		op.length < op_width ? op_pad = " " * ( 1 + op_width - op.length ) : op_pad = " "
 		
 		index == ( output.size - 1 ) ? last_line = true : last_line = false
 

@@ -11,7 +11,7 @@ tell application "BBEdit"
 	else if doc = "awk" then
 		return "awk -f"
 	else if doc = "unix shell script" then
-		return "bash"
+		return "sh"
 	else if doc = "javascript" then
 		return "node"
 	else if doc = "fish shell" then
