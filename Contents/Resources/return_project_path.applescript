@@ -5,12 +5,12 @@ tell application "BBEdit"
 	tell application "Finder" to set lib to POSIX path of (path to library folder from user domain)
 	set test_path to lib & "Application Support/BBEdit/Unix Worksheet.worksheet"
 	set doc to file of document 1
-	if doc ­ missing value then
+	if doc â‰  missing value then
 		set doc to POSIX path of doc
 	end if
 	if test_path = doc then
 		set pwd to working directory of document 1
-		return "cd '#SELSTART#" & pwd & "#SELEND#'; PWD"
+		return "cd '#SELSTART#" & pwd & "#SELEND#'; pwd"
 	end if
 	# Projects and free flowing Worksheets.
 	tell project document 1
@@ -27,17 +27,22 @@ tell application "BBEdit"
 			set is_proj to false
 		end if
 		if is_proj then
-			set _alias to file of item 1
+			if name of item 1 = w_name then
+				# BBEdit added a Project Item to the sidebar so you have to dig one level deeper to get the path of the working dir.
+				set _alias to file of item 1 of item 1
+			else
+				set _alias to file of item 1
+			end if
 			set pwd to POSIX path of _alias
-			return "cd '" & pwd & "'; PWD#INSERTION#"
+			return "cd '" & pwd & "'; pwd#INSERTION#"
 		else
 			set _alias to file of project window 1
 			if _alias = missing value then
-				return "cd <# You might want to save. #>; PWD"
+				return "cd <# You might want to save. #>; pwd"
 			else
 				tell application "Finder" to set _file to container of file _alias as alias
 				set pwd to POSIX path of _file
-				return "cd '" & pwd & "'; PWD#INSERTION#"
+				return "cd '" & pwd & "'; pwd#INSERTION#"
 			end if
 		end if
 	end tell

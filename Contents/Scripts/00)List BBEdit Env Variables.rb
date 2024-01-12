@@ -6,4 +6,4 @@ bb_env = ENV
 .map! { | bb | "#{bb[0]} = #{bb[1]}" }
 .join( "\n" )
 
-system "echo '#{bb_env}' > '/var/tmp/bb_env'; open -a 'BBEdit' '/var/tmp/bb_env'"
+system "echo '#{bb_env}' | column -s= -t > '/var/tmp/bb_env'; open -a 'BBEdit' '/var/tmp/bb_env'"
